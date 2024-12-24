@@ -7,3 +7,4 @@ undetected-chromedriver
 Flask-Login
 Flask-SQLAlchemy
 Werkzeug
+google-generativeai
