@@ -1,0 +1,9 @@
+Flask-Cors
+Flask
+instaloader
+selenium
+undetected-chromedriver
+
+Flask-Login
+Flask-SQLAlchemy
+Werkzeug
