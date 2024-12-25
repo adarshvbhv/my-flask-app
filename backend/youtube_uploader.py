@@ -16,8 +16,15 @@ from file_array import make_map
 
 # Setup WebDriver with options
 def Y_uploader_run(username):
+    
     options = uc.ChromeOptions()
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
+    options.headless = True  # Run in headless mode for Docker
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+
+    # Specify the path to the Chrome binary
+    options.binary_location = "/usr/bin/google-chrome"
 
     # Start the WebDriver
     driver = uc.Chrome(options=options)
