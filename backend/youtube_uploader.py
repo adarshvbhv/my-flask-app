@@ -42,7 +42,59 @@ def Y_uploader_run(username):
         ))
         sign_in_button.click()
         print("sign in clicked")
-        time.sleep(50)
+                next_button_ini = wait.until(
+            EC.presence_of_element_located((By.XPATH, '//*[@id="identifierNext"]/div/button'))
+        )
+
+        # Scroll to the element
+        driver.execute_script("arguments[0].scrollIntoView();", next_button_ini)
+        # Optional: Print computed style for debugging
+
+        # Wait briefly before attempting to click
+        time.sleep(1)
+
+        # Check visibility and click
+        if next_button_ini.is_displayed():
+            next_button_ini.click()
+        else:
+            print("Element is not visible, attempting to click with ActionChains.")
+            actions = ActionChains(driver)
+            actions.move_to_element(next_button_ini).click().perform()
+
+        time.sleep(5)  # Wait to observe the result
+
+
+
+        pass_input = wait.until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 'input[type="password"]'))
+        )
+        # Type the email address
+        time.sleep(2)
+        pass_input.send_keys("important4u")  # Replace with your email
+        time.sleep(5)
+        # Locate and click the "Next" button
+        next_button_ini2 = wait.until(
+            EC.presence_of_element_located((By.XPATH, '//*[@id="passwordNext"]/div/button'))
+        )
+
+        # Scroll to the element
+        driver.execute_script("arguments[0].scrollIntoView();", next_button_ini2)
+        # Optional: Print computed style for debugging
+
+        # Wait briefly before attempting to click
+        time.sleep(1)
+
+        # Check visibility and click
+        if next_button_ini2.is_displayed():
+            next_button_ini2.click()
+        else:
+            print("Element is not visible, attempting to click with ActionChains.")
+            actions = ActionChains(driver)
+            actions.move_to_element(next_button_ini2).click().perform()
+
+        time.sleep(5)  # Wait to observe the result
+
+
         
         create_button = wait.until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, "button[aria-label='Create']"))
