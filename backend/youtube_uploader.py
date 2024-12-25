@@ -26,7 +26,7 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 def Y_uploader_run(username):
     options = uc.ChromeOptions()
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
-    # options.add_argument("--headless")  # Enable headless mode
+    options.add_argument("--headless")  # Enable headless mode
     # options.add_argument("--no-sandbox")  # Bypass OS security model
     # options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
 
