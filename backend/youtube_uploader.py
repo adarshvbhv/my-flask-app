@@ -43,7 +43,15 @@ def Y_uploader_run(username):
         ))
         sign_in_button.click()
         print("sign in clicked")
-                next_button_ini = wait.until(
+        email_input = wait.until(
+            EC.presence_of_element_located((By.ID, "identifierId"))
+        )
+        # Type the email address
+        time.sleep(2)
+        email_input.send_keys("important4u2002@gmail.com")  # Replace with your email
+        time.sleep(5)
+        # Locate and click the "Next" button
+        next_button_ini = wait.until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="identifierNext"]/div/button'))
         )
 
@@ -94,6 +102,8 @@ def Y_uploader_run(username):
             actions.move_to_element(next_button_ini2).click().perform()
 
         time.sleep(5)  # Wait to observe the result
+
+
 
 
         
