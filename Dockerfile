@@ -13,12 +13,13 @@ RUN apt-get update && \
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy requirements.txt and install dependencies
+# Copy backend requirements and install dependencies
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your application files
-COPY backend/ .
+# Copy both frontend and backend files to the container
+COPY backend/ ./backend/
+COPY frontend/ ./frontend/
 
 # Command to run your application
-CMD ["python", "app.py"]
+CMD ["python", "backend/app.py"]
