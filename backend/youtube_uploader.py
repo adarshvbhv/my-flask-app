@@ -1,5 +1,6 @@
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 import warnings
 import time
 import undetected_chromedriver as uc
@@ -9,6 +10,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from genai_module import generate_ai_content 
 from upload_file import upload
 from file_array import make_map
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+
+# Function to send a notification
+
+
+# Example usage
 # from genai_module import generate_ai_content 
 # from upload_file import upload
 # from file_array import make_map
@@ -17,15 +24,11 @@ from file_array import make_map
 
 # Setup WebDriver with options
 def Y_uploader_run(username):
-    
     options = uc.ChromeOptions()
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
-    options.headless = True  # Run in headless mode for Docker
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-
-    # Specify the path to the Chrome binary
-    options.binary_location = "/usr/bin/google-chrome"
+    # options.add_argument("--headless")  # Enable headless mode
+    # options.add_argument("--no-sandbox")  # Bypass OS security model
+    # options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
 
     # Start the WebDriver
     driver = uc.Chrome(options=options)
@@ -42,6 +45,7 @@ def Y_uploader_run(username):
             (By.CSS_SELECTOR, "a[aria-label='Sign in'][href*='ServiceLogin']")
         ))
         sign_in_button.click()
+
         print("sign in clicked")
         email_input = wait.until(
             EC.presence_of_element_located((By.ID, "identifierId"))
@@ -106,6 +110,9 @@ def Y_uploader_run(username):
 
 
 
+
+
+        
         
         create_button = wait.until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, "button[aria-label='Create']"))
@@ -125,6 +132,7 @@ def Y_uploader_run(username):
         print(folder_map)
         for mp4_file, txt_file in folder_map.items():
             print("upload called")
+
             upload(username, current_url, mp4_file, txt_file, driver, wait, EC, By, generate_ai_content, time)
             time.sleep(5)
         #     # print(mp4_file)
@@ -132,8 +140,12 @@ def Y_uploader_run(username):
         
         time.sleep(5)
 
+    except NoSuchElementException:
+        print("Error: The specified element was not found.")
+    except TimeoutException:
+        print("Error: The operation timed out.")
     except Exception as e:
-        print(f"Error ooccered {e}")
+        print(f"An unexpected error occurred: {e}")
 
     # try:
     #     driver.quit()
